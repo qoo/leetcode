@@ -297,3 +297,75 @@ Let, nn be the length of string ss.
 Time Complexity: O(1) because for every move, we mark a particular row, column, diagonal, and anti-diagonal in constant time.
 
 Space Complexity: O(n) because we use arrays rows and cols of size n. The variables diagonal and antiDiagonal use constant extra space.
+
+### 1249. Minimum Remove to Make Valid Parentheses
+```
+Given a string s of '(' , ')' and lowercase English characters.
+
+Your task is to remove the minimum number of parentheses ( '(' or ')', in any positions ) so that the resulting parentheses string is valid and return any valid string.
+
+Formally, a parentheses string is valid if and only if:
+
+It is the empty string, contains only lowercase characters, or
+It can be written as AB (A concatenated with B), where A and B are valid strings, or
+It can be written as (A), where A is a valid string.
+ 
+
+Example 1:
+
+Input: s = "lee(t(c)o)de)"
+Output: "lee(t(c)o)de"
+Explanation: "lee(t(co)de)" , "lee(t(c)ode)" would also be accepted.
+Example 2:
+
+Input: s = "a)b(c)d"
+Output: "ab(c)d"
+Example 3:
+
+Input: s = "))(("
+Output: ""
+Explanation: An empty string is also valid.
+Example 4:
+
+Input: s = "(a(b(c)d)"
+Output: "a(b(c)d)"
+ 
+
+Constraints:
+
+1 <= s.length <= 105
+s[i] is either'(' , ')', or lowercase English letter.
+```
+class Solution:
+    def minRemoveToMakeValid(self, s: str) -> str:
+        # = remove extra "(", ")"
+        # ")" is extra, if no "(" exsit
+        # "(" is extra, if it reached the end
+        # stack to trace index of "("
+        
+        target = list(s)
+        stack = list()
+        
+        for idx, char in enumerate(target):
+            if char == "(":
+                stack.append(idx)
+            elif char == ")":
+                if len(stack):
+                    stack.pop()
+                else:
+                    # ")" is extra, if no "(" exsit
+                    target[idx] = ""
+                    
+        # "(" is extra, if it reached the end
+        while stack:
+            target[stack.pop()] = ""
+            
+        return "".join(target)
+        
+        
+        
+        
+        
+```
+
+```
