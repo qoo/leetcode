@@ -336,6 +336,9 @@ Constraints:
 1 <= s.length <= 105
 s[i] is either'(' , ')', or lowercase English letter.
 ```
+
+
+```
 class Solution:
     def minRemoveToMakeValid(self, s: str) -> str:
         # = remove extra "(", ")"
@@ -365,7 +368,4 @@ class Solution:
         
         
         
-        
-```
-
 ```
