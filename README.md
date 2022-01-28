@@ -47,23 +47,36 @@ All the integers in abbr will fit in a 32-bit intege
 Solution
 ```
 class Solution:
-    def validWordAbbreviation(self, word, abbr):
-        i = j = 0
-        m, n = len(word), len(abbr)
+    def validWordAbbreviation(self, word: str, abbr: str) -> bool:
+        """
+        abbr is a string, number is also string
+        a->a
+        a->"0" false
+        abc->3
+        a-z->26
+        a->b false
+        """
+        m = len(word)
+        n = len(abbr)
+        
+        i, j = 0, 0
         while i < m and j < n:
             if word[i] == abbr[j]:
                 i += 1
                 j += 1
             elif abbr[j] == "0":
                 return False
-            elif abbr[j].isnumeric():
+            elif abbr[j].isdigit():
+                # find all digits
                 k = j
-                while k < n and abbr[k].isnumeric():
+                while k < n and abbr[k].isdigit():
                     k += 1
                 i += int(abbr[j:k])
                 j = k
             else:
                 return False
+        
+        
         return i == m and j == n
 ```
 
